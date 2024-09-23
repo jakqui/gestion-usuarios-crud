@@ -19,6 +19,6 @@ public class HelloWorld {
     
     @GetMapping("/hola-mundo") 
 	public ResponseEntity<String> holaMundo(){
-		return new ResponseEntity<String>("Hola Mundo.. :)", HttpStatus.OK);
+		return new ResponseEntity<String>("Hola Mundo... :)", HttpStatus.OK);
 	}
 }
