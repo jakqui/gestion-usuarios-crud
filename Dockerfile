@@ -2,13 +2,19 @@
 FROM eclipse-temurin:17.0.8.1_1-jdk-jammy AS build
 WORKDIR /app
 
-# Copia solo los archivos necesarios para la descarga de dependencias
+# Copia mvnw y establece permisos
 COPY mvnw .
+RUN chmod +x mvnw && ls -l mvnw
+
+# Si es necesario, convertir a formato Unix y usar bash
+RUN apt-get update && apt-get install -y dos2unix && dos2unix mvnw
+
+# Copia otros archivos necesarios
 COPY .mvn .mvn
 COPY pom.xml .
 
-# Descarga las dependencias
-RUN chmod +x mvnw && ./mvnw dependency:go-offline
+# Verifica y ejecuta mvnw con bash
+RUN ls -l /app && bash ./mvnw dependency:go-offline
 
 # Copia el resto del código fuente
 COPY src src
