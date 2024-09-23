@@ -17,7 +17,7 @@ public class JDBCGestionUsuario implements DAOGestionUsuario{
 	@Override
 	public int crear(GestionUsuario usuario) {
 		String sql = "INSERT INTO usuarios "
-				+"(nombre, email, contraseña, rol) "
+				+"(nombre, email, contrasena, rol) "
 				+ "VALUES "
 				+ "(?, ?, ?, ?)";
 		jdbcTemplate.update(sql, usuario.getNombre(), usuario.getEmail(), usuario.getContrasena(), usuario.getRol());
