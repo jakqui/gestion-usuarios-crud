@@ -1,20 +1,9 @@
 package com.tmq.gestionusuarios.service;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.tmq.gestionusuarios.DAO.DAOGestionUsuario;
 import com.tmq.gestionusuarios.POJO.GestionUsuario;
@@ -46,8 +35,4 @@ public class LogicaGestionUsuario implements ServiceGestionUsuario {
 	public void eliminar(int id) {
 		repositorio.eliminar(id);
 	}
-	
-	
-
-	
 }

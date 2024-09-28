@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import com.tmq.gestionusuarios.POJO.GestionUsuario;
@@ -56,6 +57,20 @@ public class JDBCGestionUsuario implements DAOGestionUsuario{
 	public void eliminar(int id) {
 		String sql = "UPDATE usuarios SET activo = 0 WHERE id = ?";
 		jdbcTemplate.update(sql, id);
+	}
+
+	@Override
+	public GestionUsuario loadUserByUsername(String nombre) {
+		String sql = "SELECT * FROM usuarios WHERE activo = 1 AND nombre = ?";
+		GestionUsuario usuario = jdbcTemplate.queryForObject(sql,new RMGestionUsuario(), nombre);
+		return usuario;
+	}
+
+	@Override
+	public GestionUsuario findByEmail(String email) {
+		String sql = "SELECT * FROM usuarios WHERE activo = 1 AND email = ?";
+		GestionUsuario usuario = jdbcTemplate.queryForObject(sql,new RMGestionUsuario(), email);
+		return usuario;
 	}
 
 	
