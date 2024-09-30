@@ -39,20 +39,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String jwt = null;
 
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-            jwt = authorizationHeader.substring(7);
-            
+            jwt = authorizationHeader.substring(7);            
             /*if (tokenBlacklistService.isTokenBlacklisted(jwt)) {
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token has been invalidated");
                 return;
-            }*/
-            
+            }*/            
             username = jwtUtil.extractUsername(jwt);
         }
-
-        /* if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-            jwt = authorizationHeader.substring(7);
-            username = jwtUtil.extractUsername(jwt);
-        } */
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);

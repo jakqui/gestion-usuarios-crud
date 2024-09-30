@@ -1,6 +1,6 @@
 package com.tmq.gestionusuarios.service;
 
-import java.util.ArrayList;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,8 +19,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        GestionUsuario user = userRepository.findByEmail(email);
-
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getContrasena(), new ArrayList<>());
+        Optional<GestionUsuario> user = Optional.ofNullable(userRepository.buscarPorEmail(email));
+        if (user.isEmpty()) {
+            throw new UsernameNotFoundException("Usuario no encontrado");
+        }        
+        return new CustomUserDetails(user.get());
     }
 }
