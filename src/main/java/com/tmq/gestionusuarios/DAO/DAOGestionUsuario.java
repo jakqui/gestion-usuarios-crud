@@ -10,4 +10,6 @@ public interface DAOGestionUsuario {
 	public GestionUsuario buscar(int id);	
 	public void actualizar(int id, Map<String, Object> datos);
 	public void eliminar(int id);
+	public GestionUsuario loadUserByUsername(String username);
+	public GestionUsuario buscarPorEmail(String email);
 }

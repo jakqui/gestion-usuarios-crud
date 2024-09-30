@@ -15,7 +15,7 @@ public class RMGestionUsuario implements RowMapper<GestionUsuario>{
 		u.setId(rs.getInt("id"));
 		u.setNombre(rs.getString("nombre"));
 		u.setEmail(rs.getString("email"));
-		u.setContrasena(rs.getString("contraseña"));
+		u.setContrasena(rs.getString("contrasena"));
 		u.setRol(rs.getString("rol"));
 		u.setActivo(rs.getInt("activo"));
 		return u;

@@ -17,7 +17,7 @@ public class JDBCGestionUsuario implements DAOGestionUsuario{
 	@Override
 	public int crear(GestionUsuario usuario) {
 		String sql = "INSERT INTO usuarios "
-				+"(nombre, email, contraseña, rol) "
+				+"(nombre, email, contrasena, rol) "
 				+ "VALUES "
 				+ "(?, ?, ?, ?)";
 		jdbcTemplate.update(sql, usuario.getNombre(), usuario.getEmail(), usuario.getContrasena(), usuario.getRol());
@@ -58,6 +58,18 @@ public class JDBCGestionUsuario implements DAOGestionUsuario{
 		jdbcTemplate.update(sql, id);
 	}
 
-	
+	@Override
+	public GestionUsuario loadUserByUsername(String nombre) {
+		String sql = "SELECT * FROM usuarios WHERE activo = 1 AND nombre = ?";
+		GestionUsuario usuario = jdbcTemplate.queryForObject(sql,new RMGestionUsuario(), nombre);
+		return usuario;
+	}
+
+	@Override
+	public GestionUsuario buscarPorEmail(String email) {
+		String sql = "SELECT * FROM usuarios WHERE activo = 1 AND email = ?";
+		GestionUsuario usuario = jdbcTemplate.queryForObject(sql,new RMGestionUsuario(), email);
+		return usuario;
+	}
 	
 }

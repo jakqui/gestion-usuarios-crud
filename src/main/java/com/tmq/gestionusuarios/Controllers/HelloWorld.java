@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloWorld {
     @GetMapping("/")
 	public ResponseEntity<String> index(){
-		return new ResponseEntity<String>("Index 2", HttpStatus.OK);
+		return new ResponseEntity<String>("Index 2 Dev..", HttpStatus.OK);
 	}
     
     @GetMapping("/hola-mundo") 
