@@ -4,7 +4,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import com.tmq.gestionusuarios.POJO.GestionUsuario;
@@ -67,12 +66,10 @@ public class JDBCGestionUsuario implements DAOGestionUsuario{
 	}
 
 	@Override
-	public GestionUsuario findByEmail(String email) {
+	public GestionUsuario buscarPorEmail(String email) {
 		String sql = "SELECT * FROM usuarios WHERE activo = 1 AND email = ?";
 		GestionUsuario usuario = jdbcTemplate.queryForObject(sql,new RMGestionUsuario(), email);
 		return usuario;
 	}
-
-	
 	
 }
